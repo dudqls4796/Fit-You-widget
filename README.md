@@ -1,3 +1,5 @@
+![Fit You](docs/images/cover.png)
+
 # Fit You — 브랜드 사이즈·코디 추천 위젯 (무신사)
 
 > 무신사 아우터 상품 페이지에서 사이즈 고민을 줄여주는 Chrome 확장 프로그램
