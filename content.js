@@ -32,31 +32,6 @@
 (function () {
   "use strict";
 
-  // DEV-ONLY AUTO-RELOAD (배포 전 제거) - BEGIN
-  const DEV_RELOAD_PING_INTERVAL_MS = 2000;
-  let devReloadPingTimer = null;
-
-  function sendDevReloadPing() {
-    try {
-      if (!chrome.runtime || !chrome.runtime.id) {
-        if (devReloadPingTimer !== null) clearInterval(devReloadPingTimer);
-        devReloadPingTimer = null;
-        return;
-      }
-
-      const pingPromise = chrome.runtime.sendMessage({ type: "DEV_RELOAD_PING" });
-      if (pingPromise && typeof pingPromise.catch === "function") {
-        void pingPromise.catch(() => {});
-      }
-    } catch (error) {
-      // 확장 reload 직후 이전 content script 컨텍스트에서 발생하는 종료 오류는 무시한다.
-    }
-  }
-
-  sendDevReloadPing();
-  devReloadPingTimer = setInterval(sendDevReloadPing, DEV_RELOAD_PING_INTERVAL_MS);
-  // DEV-ONLY AUTO-RELOAD (배포 전 제거) - END
-
   // 점수(−2~+2)를 사람이 읽는 여론 문구로 바꾸기 위한 구간표.
   // 점수가 각 구간의 max 이하인 첫 항목의 label을 쓴다(마지막 2.01은 +2까지 포함하기 위한 여유값).
   const SCORE_BAND = [
