@@ -1,0 +1,51 @@
+/* =============================================================================
+   popup.css — 확장 팝업("최근 본 상품") 스타일
+   ============================================================================= */
+
+/* 패딩·테두리를 너비에 포함해 레이아웃 계산을 단순하게 */
+* { box-sizing: border-box; }
+
+/* 팝업 창 크기: 폭 340px 고정, 높이는 내용에 따라 96~540px */
+body {
+  width: 340px;
+  min-height: 96px;
+  max-height: 540px;
+  margin: 0;
+  color: #18191b;
+  background: #fff;
+  font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+.popup { padding: 16px; }
+
+/* 팝업 제목 "최근 본 상품" */
+h1 { margin: 0 0 12px; font-size: 15px; font-weight: 700; }
+
+/* 목록이 비었을 때 안내 문구 */
+.empty { margin: 22px 0; color: #85878c; font-size: 13px; text-align: center; }
+
+/* 상품 목록: 세로 그리드, 470px 넘으면 내부 스크롤 */
+.products { display: grid; gap: 10px; max-height: 470px; margin: 0; padding: 0; overflow: auto; list-style: none; }
+
+/* 상품 한 줄(썸네일 + 이름)을 감싸는 버튼. 기본 버튼 모양을 지우고 가로 정렬 */
+.product-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 11px;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* 상품 썸네일(54x64). 이미지가 없을 때를 대비해 회색 배경 */
+.product-image { width: 54px; height: 64px; flex: none; border-radius: 5px; object-fit: cover; background: #e7e8ea; }
+/* 이미지 없음/로딩 실패 시 popup.js가 붙이는 클래스 */
+.product-image.placeholder { background: #e7e8ea; }
+
+/* 상품명: 최대 2줄까지 표시하고 넘치면 말줄임 */
+.product-name { display: -webkit-box; overflow: hidden; font-size: 12px; line-height: 1.5; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+/* 마우스를 올리면 상품명에 밑줄로 클릭 가능함을 표시 */
+.product-button:hover .product-name { text-decoration: underline; }

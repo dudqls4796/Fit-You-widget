@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "브랜드 사이즈·코디 추천 위젯 (무신사)",
+  "short_name": "사이즈·코디 추천",
+  "version": "1.0.0",
+  "description": "무신사 아우터 상품의 사이즈, 코디 세트, 비슷한 상품을 추천합니다. 원본 브랜드 사이즈 위젯과 별도 설치용입니다.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.musinsa.com/*",
+    "https://my.musinsa.com/*",
+    "https://api.musinsa.com/*",
+    "https://goods.musinsa.com/*",
+    "https://goods-detail.musinsa.com/*",
+    "https://content.musinsa.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.musinsa.com/products/*"],
+      "js": ["widget.html.js", "outfit-recommendations.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "style.css",
+        "assets/size-guide-generic.svg"
+      ],
+      "matches": ["https://www.musinsa.com/*"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: https://*.msscdn.net https://image.msscdn.net"
+  }
+}
